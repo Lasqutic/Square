@@ -1,4 +1,4 @@
-import { Square } from './square';
+import { Square } from './square.service';
 
 const square = new Square(5);
 

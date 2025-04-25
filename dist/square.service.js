@@ -3,9 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Square = void 0;
 class Square {
     constructor(sideLength) {
-        this.randomBool = () => {
-            return Math.floor(Math.random() * 2) === 1;
-        };
         this.sideLength = sideLength;
     }
     getSideLength() {
@@ -20,7 +17,15 @@ class Square {
         return this.formatResult(result, 'Perimeter');
     }
     formatResult(value, label) {
-        return this.randomBool() ? value : `${label}: ${value}`;
+        if (this.randomBool()) {
+            return `${label}: ${value}`;
+        }
+        else {
+            return value;
+        }
+    }
+    randomBool() {
+        return Math.floor(Math.random() * 2) === 1;
     }
 }
 exports.Square = Square;
