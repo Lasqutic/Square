@@ -29,7 +29,7 @@ export class Square implements SquareConfig {
     private formatResult(value: number, label: string): CalcResult {
         return this.randomBool() ? value : `${label}: ${value}`;
     }
-    private randomBool = (): boolean => {
+    private randomBool(): boolean {
         return Math.floor(Math.random() * 2) === 1;
     }
 }
