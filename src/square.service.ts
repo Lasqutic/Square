@@ -1,8 +1,18 @@
-import { ISquareConfig } from './square.interface';
+import { ISquare } from './square.interface';
 
 type FormattedNumberResult = number | string;
 
-export class Square implements ISquareConfig {
+export enum ReturnTypeEnum {
+    Number = 'number',
+    String = 'string',
+}
+
+type ReturnType = {
+    [ReturnTypeEnum.Number]: number;
+    [ReturnTypeEnum.String]: string;
+};
+
+export class Square implements ISquare {
 
     readonly sideLength: number;
 
@@ -14,24 +24,38 @@ export class Square implements ISquareConfig {
         return this.sideLength
     }
 
-    public getArea<T extends FormattedNumberResult>(): T {
+    public getArea(): FormattedNumberResult {
         const result = this.sideLength ** 2;
-        return this.formatResult(result, 'Area')
+        return this.randomizeResult(result);
     }
 
-    public getPerimeter<T extends FormattedNumberResult>(): T {
+    public getPerimeter(): FormattedNumberResult {
         const result = this.sideLength * 4;
-        return this.formatResult(result, 'Perimeter')
+        return this.randomizeResult(result);
     }
 
-    private formatResult<T extends FormattedNumberResult>(value: number, label: string): T {
-        if (this.randomBool()) {
-            return `${label}: ${value}` as T
-        } else {
-            return value as T;
+    public getPerimeterGen<T extends ReturnTypeEnum>(type: T): ReturnType[T] {
+        const result = this.sideLength * 4;
+
+        if (type === ReturnTypeEnum.String) {
+            return result.toString() as ReturnType[T];
         }
+        return result as ReturnType[T];
     }
-    private randomBool(): boolean {
-        return Math.floor(Math.random() * 2) === 1;
+
+    public getAreaGen<T extends ReturnTypeEnum>(type: T): ReturnType[T] {
+        const result = this.sideLength ** 2;
+
+        if (type === ReturnTypeEnum.String) {
+            return result.toString() as ReturnType[T];
+        }
+        return result as ReturnType[T];
     }
+
+    private randomizeResult(value: number): FormattedNumberResult {
+        return Math.floor(Math.random() * 10) % 2 === 0
+            ? value
+            : value.toString();
+    }
+
 }

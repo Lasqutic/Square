@@ -1,3 +1,3 @@
-export interface ISquareConfig {
-    sideLength?: number;
+export interface ISquare {
+    sideLength: number;
 }
