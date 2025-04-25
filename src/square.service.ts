@@ -1,6 +1,6 @@
-
-
 import { ISquareConfig } from './square.interface';
+
+type FormattedNumberResult = number | string;
 
 export class Square implements ISquareConfig {
 
@@ -14,21 +14,20 @@ export class Square implements ISquareConfig {
         return this.sideLength
     }
 
-    public getArea<T extends string | number>(): T {
+    public getArea<T extends FormattedNumberResult>(): T {
         const result = this.sideLength ** 2;
         return this.formatResult(result, 'Area')
     }
 
-    public getPerimeter<T extends string | number>(): T {
+    public getPerimeter<T extends FormattedNumberResult>(): T {
         const result = this.sideLength * 4;
         return this.formatResult(result, 'Perimeter')
     }
 
-    private formatResult<T extends string | number>(value: number, label: string): T {
+    private formatResult<T extends FormattedNumberResult>(value: number, label: string): T {
         if (this.randomBool()) {
             return `${label}: ${value}` as T
-        }
-        else {
+        } else {
             return value as T;
         }
     }
