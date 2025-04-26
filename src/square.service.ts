@@ -1,6 +1,4 @@
-import { ISquare } from './square.interface';
-
-type FormattedNumberResult = number | string;
+import { ISquare, FormattedNumberResult } from './square.interface';
 
 export enum ReturnTypeEnum {
     Number = 'number',

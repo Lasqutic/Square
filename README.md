@@ -72,10 +72,16 @@ Perimeter: 20
 
 ##  API Reference
 
-### Interface: `ISquareConfig`
+### Interface: `ISquare`
 ```ts
-export interface ISquareConfig {
-    sideLength?: number;
+export type FormattedNumberResult = number | string;
+
+export interface ISquare {
+    sideLength: number;
+
+    getPerimeter(): FormattedNumberResult;
+    getArea(): FormattedNumberResult;
+    getSideLength(): number;
 }
 ```
 
@@ -85,9 +91,11 @@ constructor(sideLength: number)
 ```
 
 #### Methods
-- `getSideLength(): number`
-- `getArea<T extends string | number>(): T`
-- `getPerimeter<T extends string | number>(): T`
+- `getPerimeter(): FormattedNumberResult;`
+- `getArea(): FormattedNumberResult;`
+- `getSideLength(): number;`
+- `getPerimeterGen<T extends ReturnTypeEnum>(type: T): ReturnType[T]; `
+- `getAreaGen<T extends ReturnTypeEnum>(type: T): ReturnType[T];`
 
 ---
 
@@ -95,6 +103,6 @@ constructor(sideLength: number)
 - `getArea()` and `getPerimeter()` randomly return either:
   - a number (e.g. `25`)
   - or a string labeled format (e.g. `"Area: 25"`)
-- This behavior is controlled via a private method `randomBool()`.
+- This behavior is controlled via a private method `randomizeResult()`.
 
 ---
